@@ -25,7 +25,7 @@ body {
 
 @font-face {
   font-family: "Roobert";
-  src: url("../../public/fonts/roobert/Roobert-Regular.woff2") format("woff2");
+  src: "../../public/fonts/roobert/Roobert-Regular.woff2";
   font-weight: 400;
   font-style: normal;
 }
@@ -34,12 +34,5 @@ body {
   font-family: "Roobert";
   src: url("../../public/fonts/roobert/Roobert-Medium.woff2") format("woff2");
   font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Roobert";
-  src: url("../../public/fonts/roobert/Roobert-Bold.woff2") format("woff2");
-  font-weight: 700;
   font-style: normal;
 }
