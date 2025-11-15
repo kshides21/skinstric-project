@@ -82,6 +82,7 @@
   text-align: center;
   margin: 220px auto;
   position: relative;
+  font-weight: 100;
 }
 
 .titleWrapper {
@@ -104,13 +105,13 @@
 --------------------------------- */
 
 .home__intro__layout:has(.discover__btn:hover) .titleWrapper {
-  transform: translateX(300px);
+  transform: translateX(30%);
   transition: transform 0.5s ease;
 }
 
 .home__intro__layout:has(.discover__btn:hover) .home__title {
-    text-align: right;
-    transition: all 0.5s ease;
+  text-align: right;
+  transition: all 0.5s ease;
 }
 
 .home__intro__layout:has(.discover__btn:hover) .rightSide {
@@ -120,13 +121,13 @@
 }
 
 .home__intro__layout:has(.test__btn:hover) .titleWrapper {
-  transform: translateX(-300px);
+  transform: translateX(-30%);
   transition: transform 0.5s ease;
 }
 
 .home__intro__layout:has(.test__btn:hover) .home__title {
-    text-align: left;
-    transition: all 0.5s ease;
+  text-align: left;
+  transition: all 0.5s ease;
 }
 
 .home__intro__layout:has(.test__btn:hover) .leftSide {
@@ -174,4 +175,80 @@
   color: #1a1b1c;
   font-weight: 100;
   position: absolute;
+}
+
+.title__text__small,
+.proceed__small,
+.rombus__outline,
+.test__btn__small {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .test__btn__small {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    display: inline-block;
+  }
+  .leftSide,
+  .rightSide {
+    display: none;
+  }
+  .titleWrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    padding-top: 160px;
+  }
+  .rombus__outline {
+    position: absolute;
+    z-index: 1;
+    width: 260px;
+    bottom: auto;
+    transform: translateX(-250px);
+    overflow: visible;
+    pointer-events: none;
+  }
+  .home__title {
+    font-size: 60px;
+    text-align: center;
+    z-index: 2;
+    margin: 20px 0 0;
+  }
+  .title__text__small,
+  .proceed__small,
+  .rombus__outline {
+    display: block;
+  }
+  .title__text__small {
+    color: #1a1b1c83;
+    text-align: center;
+    margin: 16px 0;
+    z-index: 2;
+    max-width: 280px;
+  }
+  .proceed__small {
+    z-index: 2;
+    margin-top: 20px;
+    transition: transform 0.2s ease;
+    transform-origin: center;
+  }
+  .title__text {
+    display: none;
+  }
+  .proceed__small {
+    transition: transform 0.3s ease;
+    transform-origin: center;
+  }
+  .test__btn__small:hover .proceed__small img {
+    transform: scale(1.07);
+  }
 }

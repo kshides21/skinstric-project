@@ -2,6 +2,7 @@ import Link from "next/link";
 import discover from "../../assets/discover.svg";
 import test from "../../assets/take-test.svg";
 import rectagle from "../../assets/Rectangle.svg";
+import rombuses from "../../assets/rombuses.svg";
 import Image from "next/image";
 import styles from "./page.module.css";
 
@@ -37,9 +38,23 @@ export default function Home() {
           </div>
 
           <div className={styles.titleWrapper}>
+            <div className={styles.rombus__outline}>
+              <Image src={rombuses} alt="outline" />
+            </div>
             <h1 className={styles.home__title}>
               Sophistocated <br /> skincare
             </h1>
+            <p className={styles.title__text__small}>
+              SKINSTRIC DEVELOPED AN A.I. THAT CREATES A HIGHLY-PERSONALIZED
+              ROUTINE TAILORED TO WHAT YOUR SKIN NEEDS.
+            </p>
+            <button className={styles.test__btn__small}>
+              <Link href={"/testing"}>
+              <div className={styles.proceed__small}>
+                <Image src={test} alt="outline" />
+              </div>
+              </Link>
+            </button>
           </div>
 
           <div className={styles.rightSide}>
@@ -48,9 +63,11 @@ export default function Home() {
             </div>
             <div className={styles.test__wrapper}>
               <button className={styles.test__btn}>
+                <Link href={"/testing"}>
                 <div className={styles.test__normal}>
                   <Image src={test} alt="take test" />
                 </div>
+                </Link>
               </button>
             </div>
           </div>
