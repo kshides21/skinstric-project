@@ -41,3 +41,119 @@
   color: white;
   cursor: not-allowed;
 }
+
+/* ---------- MAIN ---------- */
+
+.start__analysis {
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 32px;
+}
+
+.titleWrapper {
+  position: relative;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  transition: all 0.4s ease;
+  justify-content: center;
+  overflow: visible;
+  padding-top: 160px;
+}
+
+.rombus__wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  margin-top: 88px;
+}
+
+.rombus__outline {
+  animation: slowSpin 40s linear infinite;
+  transform-origin: center center;
+}
+
+.home__title {
+  font-size: 60px;
+  text-align: center;
+  z-index: 2;
+  margin: 20px 0 0;
+  position: relative;
+  font-weight: 100;
+  border: none;
+  outline: none;
+  border-bottom: 1px #1a1b1c83 solid;
+  background-color: transparent;
+  max-width: 500px;
+}
+
+.title__text__small {
+  color: #1a1b1c83;
+  text-align: center;
+  margin: 16px 0;
+  z-index: 2;
+  max-width: 280px;
+}
+
+.test__btn__small {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  display: inline-block;
+}
+
+.proceed__small {
+  z-index: 2;
+  margin-top: 20px;
+  transition: transform 0.2s ease;
+  transform-origin: center;
+}
+
+.back__btn {
+    position: absolute;
+    bottom: 48px;
+    left: 48px;
+}
+
+.proceed__small {
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+.test__btn__small:hover .proceed__small img {
+  transform: scale(1.07);
+}
+
+.rombus__outline__small {
+    display: none;
+}
+
+@keyframes slowSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.rombus__outline {
+  animation: slowSpin 40s linear infinite;
+}
+
+@media (max-width: 776px) {
+    .home__title::placeholder {
+        font-size: 40px;
+    }
+    .home__title {
+        max-width: 360px;
+    }
+    .rombus__outline__big {
+        display: none;
+    }
+    .rombus__outline__small{
+        display: block;
+    }
+}

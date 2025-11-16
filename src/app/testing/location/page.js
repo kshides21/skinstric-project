@@ -1,38 +1,57 @@
 "use client";
 
 import Link from "next/link";
-import styles from "./page.module.css";
-import rombuses from "../../../assets/rombuses.svg";
-import rombusesSmall from "../../../assets/rombuses2.svg";
-import back from "../../../assets/back.svg";
-import proceed from "../../../assets/proceed.svg";
+import styles from "../page.module.css";
+import rombuses from "../../../../assets/rombuses.svg";
+import rombusesSmall from "../../../../assets/rombuses2.svg";
+import back from "../../../../assets/back.svg";
+import proceed from "../../../../assets/proceed.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function Testing() {
+export default function TestingLocation() {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
   const [error, setError] = useState("");
 
-  const validate = () => {
-    if (!name.trim()) return "Name is required.";
-    if (!/^[a-zA-Z\s]+$/.test(name)) return "Name must contain only letters.";
+  useEffect(() => {
+    const storedName = localStorage.getItem("skinstric_name");
+    if (!storedName) router.push("/testing");
+    setName(storedName || "");
+  }, []);
+
+  const validateLocation = () => {
+    if (!location.trim()) return "Location is required.";
+    if (!/^[A-Za-z\s]+$/.test(location)) return "Location must contain only letters.";
     return "";
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const err = validate();
+    const err = validateLocation();
     if (err) {
       setError(err);
       return;
     }
 
-    localStorage.setItem("skinstric_name", name);
+    localStorage.setItem("skinstric_name", location.trim());
 
-    router.push("/testing/location");
+    await fetch(
+      "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseOne",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          location: location.trim(),
+        }),
+      }
+    );
+
+    router.push("/testing/results");
   };
 
   return (
@@ -65,15 +84,15 @@ export default function Testing() {
 
           <input
             className={styles.home__title}
-            placeholder="Introduce Yourself"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            placeholder="Your City Name"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
           />
 
           {error && <p className={styles.errorText}>{error}</p>}
 
           <button className={styles.test__btn__small}>
-            <Link href={"/testing/location"}>
+            <Link href={"/results"}>
               <div className={styles.proceed__small}>
                 <Image src={proceed} alt="outline" />
               </div>
@@ -82,7 +101,7 @@ export default function Testing() {
         </form>
 
         <button className={`${styles.back__btn} ${styles.test__btn__small}`}>
-          <Link href={"/"}>
+          <Link href={"/testing"}>
             <div className={styles.proceed__small}>
               <Image src={back} alt="back" />
             </div>
