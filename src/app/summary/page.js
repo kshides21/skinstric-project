@@ -1,21 +1,26 @@
-'use client'
+"use client";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import back from "../../../assets/back.svg";
 import proceed from "../../../assets/proceed.svg";
-import { useSearchParams } from "next/navigation";
-
+import { useEffect, useState } from "react";
 
 export default function Summary() {
-    const params = useSearchParams();
-    const data = JSON.parse(params.get("data") || "{}");
+  const [analysis, setAnalysis] = useState(null);
 
-    console.log("AI output:", data);
+  useEffect(() => {
+    const stored = localStorage.getItem("analysisResult");
+    if (stored) {
+      setAnalysis(JSON.parse(stored));
+    }
+  }, []);
 
-    return (
-        <>
-        <header className={styles.header}>
+  console.log("AI output:", analysis);
+
+  return (
+    <>
+      <header className={styles.header}>
         <div className={styles.header__home__left}>
           <Link className={styles.header__link__wrapper} href={"/"}>
             <div className={styles.header__link}>SKINSTRIC</div>
@@ -30,13 +35,13 @@ export default function Summary() {
         <div className={styles.start__analysis__text}>PREDICTED RACE & AGE</div>
 
         <div className={styles.demographics__wrapper}>
-            <div className={styles.demographics__qualifiers__wrapper}>
-                <div className={styles.demographics__category__wrapper}>RACE</div>
-                <div className={styles.demographics__category__wrapper}>AGE</div>
-                <div className={styles.demographics__category__wrapper}>SEX</div>
-            </div>
-            <div className={styles.demographics__display__wrapper}></div>
-            <div className={styles.demographics__uniques__wrapper}></div>
+          <div className={styles.demographics__qualifiers__wrapper}>
+            <div className={styles.demographics__category__wrapper}>RACE</div>
+            <div className={styles.demographics__category__wrapper}>AGE</div>
+            <div className={styles.demographics__category__wrapper}>SEX</div>
+          </div>
+          <div className={styles.demographics__display__wrapper}></div>
+          <div className={styles.demographics__uniques__wrapper}></div>
         </div>
 
         <button className={`${styles.back__btn} ${styles.test__btn__small}`}>
@@ -46,7 +51,9 @@ export default function Summary() {
             </div>
           </Link>
         </button>
-        <div className={styles.start__analysis__bottom}>If the A.I estimate is wrong, select the correct descriptors.</div>
+        <div className={styles.start__analysis__bottom}>
+          If the A.I estimate is wrong, select the correct descriptors.
+        </div>
         <button className={`${styles.proceed__btn} ${styles.test__btn__small}`}>
           <Link href={"/"}>
             <div className={styles.proceed__small}>
@@ -55,6 +62,6 @@ export default function Summary() {
           </Link>
         </button>
       </main>
-        </>
-    )
+    </>
+  );
 }

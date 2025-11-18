@@ -14,7 +14,6 @@ import cameraText from "../../../assets/cameraTitle.svg";
 export default function Results() {
   const fileInputRef = useRef(null);
   const router = useRouter();
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const toBase64 = (file) =>

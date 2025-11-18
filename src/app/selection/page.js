@@ -1,3 +1,4 @@
+'use client'
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,8 +9,11 @@ import demographics from "../../../assets/demographics.svg";
 import skin from "../../../assets/skinType.svg";
 import concerns from "../../../assets/concerns.svg";
 import diamond from "../../../assets/rombusesDiamond.svg";
+import { useRouter } from "next/navigation";
 
 export default function Selection() {
+  const router = useRouter();
+  
   return (
     <>
       <header className={styles.header}>
@@ -31,11 +35,11 @@ export default function Selection() {
 
         <div className={styles.select__wrapper}>
           <div className={styles.northsouth__wrapper}>
-            <Link href={"/summary"}>
+            <button className={styles.test__btn__small}  onClick={() => router.push('/summary')}>
               <div className={styles.demographics}>
                 <Image src={demographics} alt="demos" />
               </div>
-            </Link>
+            </button>
             <div className={styles.weather}>
               <Image src={weather} alt="weather" />
             </div>
