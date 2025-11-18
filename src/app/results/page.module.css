@@ -1,0 +1,158 @@
+/* ---------- HEADER ---------- */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  margin: 0 0 12px;
+}
+
+.header__link__wrapper {
+  text-decoration: none;
+}
+
+.header__link {
+  font-size: 14px;
+  margin: 0 8px 0 0;
+  padding: 8px 16px;
+  font-weight: bold;
+  color: #1a1b1c;
+}
+
+.header__sublink {
+  font-size: 14px;
+  margin: 0 6px;
+  color: #1a1b1c83;
+}
+
+.header__home__left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 4px;
+}
+
+.header__home__right {
+  font-size: 10px;
+  padding: 8px 16px;
+  margin: 0 16px;
+  background-color: #1a1b1c;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* ---------- MAIN ---------- */
+
+.start__analysis {
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 32px;
+}
+
+.test__btn__small {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  display: inline-block;
+}
+
+.back__btn {
+    position: absolute;
+    bottom: 48px;
+    left: 48px;
+}
+
+.proceed__small {
+  z-index: 2;
+  margin-top: 20px;
+  transition: transform 0.2s ease;
+  transform-origin: center;
+}
+
+.test__btn__small:hover .proceed__small img {
+  transform: scale(1.07);
+}
+
+.analysis__wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 280px 32px;
+}
+
+.analysis__item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes slowSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.rombus__wrapper {
+  pointer-events: none;
+  z-index: 1;
+  margin-top: 88px;
+}
+
+.rombus__outline__small {
+  position: absolute;
+  animation: slowSpin 40s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.photo__wrapper {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
+  transform-origin: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.photo__wrapper:hover img {
+  transform: scale(1.07);
+}
+
+.gallery__text {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+}
+
+.photo__text {
+    position: absolute;
+    left: 38px;
+    bottom: 40px;
+}
+
+@media (max-width: 776px) {
+    .analysis__wrapper {
+        flex-direction: column;
+        gap: 120px;
+        padding: 120px 32px;
+    }
+
+    .analysis__item {
+        margin: 48px;
+    }
+
+    .rombus__outline__small {
+        display: none;
+    }
+
+}

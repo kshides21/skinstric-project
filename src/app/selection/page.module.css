@@ -1,0 +1,135 @@
+/* ---------- HEADER ---------- */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  margin: 0 0 12px;
+}
+
+.header__link__wrapper {
+  text-decoration: none;
+}
+
+.header__link {
+  font-size: 14px;
+  margin: 0 8px 0 0;
+  padding: 8px 16px;
+  font-weight: bold;
+  color: #1a1b1c;
+}
+
+.header__sublink {
+  font-size: 14px;
+  margin: 0 6px;
+  color: #1a1b1c83;
+}
+
+.header__home__left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 4px;
+}
+
+.header__home__right {
+  font-size: 10px;
+  padding: 8px 16px;
+  margin: 0 16px;
+  background-color: #1a1b1c;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* ---------- MAIN ---------- */
+
+.start__analysis {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 32px;
+}
+
+.start__analysis__text {
+  font-size: 14px;
+  font-weight: 200;
+  margin-left: 32px;
+  max-width: 280px;
+  margin-top: 12px;
+  line-height: 3cqh;
+}
+
+.test__btn__small {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  display: inline-block;
+}
+
+.back__btn {
+    position: absolute;
+    bottom: 48px;
+    left: 48px;
+}
+
+.summary__btn {
+  position: absolute;
+  bottom: 48px;
+  right: 48px;
+}
+
+.test__btn__small:hover .proceed__small img {
+  transform: scale(1.07);
+}
+
+.select__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  padding: 220px 32px;
+}
+
+.eastwest__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  gap: 12px;
+}
+
+.northsouth__wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  gap: 12px;
+}
+
+.diamond {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+.skin, .weather, .concerns {
+  cursor: not-allowed;
+}
+
+.skin:hover, .weather:hover, .concerns:hover, .demographics:hover {
+  filter: contrast(0.8);
+}
+
+.select__wrapper:hover > .diamond {
+  opacity: 1;
+}
+
+.demographics:hover {
+  transform: scale(1.07);
+  cursor: pointer;
+}

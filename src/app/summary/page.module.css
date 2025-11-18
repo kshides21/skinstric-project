@@ -1,0 +1,129 @@
+/* ---------- HEADER ---------- */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  margin: 0 0 12px;
+}
+
+.header__link__wrapper {
+  text-decoration: none;
+}
+
+.header__link {
+  font-size: 14px;
+  margin: 0 8px 0 0;
+  padding: 8px 16px;
+  font-weight: bold;
+  color: #1a1b1c;
+}
+
+.header__sublink {
+  font-size: 14px;
+  margin: 0 6px;
+  color: #1a1b1c83;
+}
+
+.header__home__left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 4px;
+}
+
+.header__home__right {
+  font-size: 10px;
+  padding: 8px 16px;
+  margin: 0 16px;
+  background-color: #1a1b1c;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* ---------- MAIN ---------- */
+
+.start__analysis {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 32px;
+}
+
+.start__analysis__title {
+    font-size: 72px;
+    font-weight: 500;
+    margin-left: 32px;
+}
+
+.start__analysis__text {
+    margin-left: 32px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #1a1b1c;
+}
+
+.test__btn__small {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  display: inline-block;
+}
+
+.back__btn {
+    position: absolute;
+    bottom: 48px;
+    left: 48px;
+}
+
+.test__btn__small:hover .proceed__small img {
+  transform: scale(1.07);
+}
+
+.proceed__btn {
+    position: absolute;
+    bottom: 48px;
+    right: 48px;
+}
+
+.start__analysis__bottom {
+    text-align: center;
+    color: #1a1b1c83;
+}
+
+.demographics__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 24px;
+}
+
+.demographics__qualifiers__wrapper {
+    width: 15%;
+    margin: 12px;
+}
+
+.demographics__display__wrapper {
+    width: 60%;
+    margin: 12px;
+}
+
+.demographics__uniques__wrapper {
+    width: 25%;
+    margin: 12px;
+}
+
+.demographics__category__wrapper {
+    height: 88px;
+    background-color: rgb(233, 233, 233);
+    border-top: 1px solid #1a1b1c;
+    margin-bottom: 24px;
+}
+
+.demographics__display__wrapper, .demographics__uniques__wrapper {
+    height: 444px;
+    background-color: rgb(233, 233, 233);
+    border-top: 1px solid #1a1b1c;
+}

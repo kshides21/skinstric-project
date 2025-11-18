@@ -1,3 +1,5 @@
+'use client'
+import { useEffect } from "react";
 import Link from "next/link";
 import discover from "../../assets/discover.svg";
 import test from "../../assets/take-test.svg";
@@ -5,8 +7,18 @@ import rectagle from "../../assets/Rectangle.svg";
 import rombuses from "../../assets/rombuses.svg";
 import Image from "next/image";
 import styles from "./page.module.css";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Home() {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 600,
+      once: true,
+    });
+  }, []);
+
   return (
     <>
       <header className={styles.header}>
@@ -41,9 +53,11 @@ export default function Home() {
             <div className={styles.rombus__outline}>
               <Image src={rombuses} alt="outline" />
             </div>
-            <h1 className={styles.home__title}>
-              Sophistocated <br /> skincare
-            </h1>
+            <div data-aos="fade-in">
+              <h1 className={styles.home__title}>
+                Sophistocated <br /> skincare
+              </h1>
+            </div>
             <p className={styles.title__text__small}>
               SKINSTRIC DEVELOPED AN A.I. THAT CREATES A HIGHLY-PERSONALIZED
               ROUTINE TAILORED TO WHAT YOUR SKIN NEEDS.
