@@ -51,16 +51,16 @@
 }
 
 .start__analysis__title {
-    font-size: 72px;
-    font-weight: 500;
-    margin-left: 32px;
+  font-size: 72px;
+  font-weight: 500;
+  margin-left: 32px;
 }
 
 .start__analysis__text {
-    margin-left: 32px;
-    font-size: 14px;
-    font-weight: 300;
-    color: #1a1b1c;
+  margin-left: 32px;
+  font-size: 14px;
+  font-weight: 300;
+  color: #1a1b1c;
 }
 
 .test__btn__small {
@@ -73,9 +73,9 @@
 }
 
 .back__btn {
-    position: absolute;
-    bottom: 48px;
-    left: 48px;
+  position: absolute;
+  bottom: 48px;
+  left: 48px;
 }
 
 .test__btn__small:hover .proceed__small img {
@@ -83,47 +83,187 @@
 }
 
 .proceed__btn {
-    position: absolute;
-    bottom: 48px;
-    right: 48px;
+  position: absolute;
+  bottom: 48px;
+  right: 48px;
 }
 
 .start__analysis__bottom {
-    text-align: center;
-    color: #1a1b1c83;
+  text-align: center;
+  color: #1a1b1c83;
 }
 
 .demographics__wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 24px;
 }
 
 .demographics__qualifiers__wrapper {
-    width: 15%;
-    margin: 12px;
+  width: 15%;
+  margin: 12px;
 }
 
 .demographics__display__wrapper {
-    width: 60%;
-    margin: 12px;
+  width: 60%;
+  margin: 12px;
 }
 
 .demographics__uniques__wrapper {
-    width: 25%;
-    margin: 12px;
+  width: 25%;
+  margin: 12px;
 }
 
 .demographics__category__wrapper {
-    height: 88px;
-    background-color: rgb(233, 233, 233);
-    border-top: 1px solid #1a1b1c;
-    margin-bottom: 24px;
+  height: 88px;
+  background-color: rgb(233, 233, 233);
+  border-top: 1px solid #1a1b1c;
+  margin-bottom: 24px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-.demographics__display__wrapper, .demographics__uniques__wrapper {
-    height: 444px;
-    background-color: rgb(233, 233, 233);
-    border-top: 1px solid #1a1b1c;
+.demographics__category {
+  margin-left: 10px;
+}
+
+.demographics__display__wrapper,
+.demographics__uniques__wrapper {
+  height: 420px;
+  background-color: rgb(233, 233, 233);
+  border-top: 1px solid #1a1b1c;
+}
+
+.option__row {
+  height: 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding-right: 12px;
+}
+
+.option__row:hover,
+.demographics__category__wrapper:hover {
+  background-color: lightgray;
+}
+
+.option__header {
+  height: 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 20px;
+  padding-top: 2px;
+}
+
+.option__title {
+  display: flex;
+  margin: 8px;
+}
+
+.option__title__img {
+  margin-right: 8px;
+}
+
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+/* ---------- MIDDLE WRAPPER ---------- */
+
+.center__circle__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
+.center__label {
+  font-size: 36px;
+  margin-bottom: 15px;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+}
+
+.circle {
+  width: 280px;
+  height: 280px;
+  margin-left: 180px;
+}
+
+circle.bg {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 20;
+}
+
+circle.fg {
+  fill: none;
+  stroke: black;
+  stroke-width: 20;
+  stroke-linecap: round;
+  stroke-dasharray: 1018;
+  stroke-dashoffset: 1018;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.percent__text {
+  font-size: 46px;
+  font-weight: 200;
+  fill: black;
+}
+
+
+@media (max-width: 992px) {
+  .center__label {
+    display: none;
+  }
+  .circle {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 776px) {
+  .demographics__wrapper {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .demographics__qualifiers__wrapper,
+  .demographics__display__wrapper,
+  .demographics__uniques__wrapper {
+    width: 100%; 
+  }
+
+  .demographics__category__wrapper {
+    margin-bottom: 8px;
+    height: 64px;
+  }
+
+  .start__analysis__title {
+    font-size: 52px;
+  }
+
+  .back__btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+}
+
+.proceed__btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+}
+
 }

@@ -7,10 +7,19 @@ import Image from "next/image";
 import rombuses from "../../../assets/rombuses.svg";
 import rombusesSmall from "../../../assets/rombuses2.svg";
 import { VscCircleFilled } from "react-icons/vsc";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Loading() {
   const router = useRouter();
   const [showSuccess, setShowSuccess] = useState(false);
+
+  useEffect(() => {
+      AOS.init({
+        duration: 600,
+        once: true,
+      });
+    }, []);
 
   useEffect(() => {
     async function fakeUpload() {
@@ -73,7 +82,7 @@ export default function Loading() {
             />
           </div>)}
           {showSuccess && (
-            <button onClick={handleOK} className={`${styles.results__btn} ${styles.test__btn__small}`}>SEE RESULTS</button>
+            <button data-aos="fade-up" onClick={handleOK} className={`${styles.results__btn} ${styles.test__btn__small}`}>SEE RESULTS</button>
           )}
         </div>
       </main>
