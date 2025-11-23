@@ -56,8 +56,16 @@ export default function Summary() {
 
   const data = analysis?.data;
   if (!data) {
-    return <div className={styles.loading}>Loading Analysis...</div>;
+    return <div className={styles.loading}>Loading Data Analysis...</div>;
   }
+
+  const sortedRaceData = Object.fromEntries(
+  Object.entries(data.race).sort((a, b) => b[1] - a[1])
+  );
+
+  const sortedSexData = Object.fromEntries(
+  Object.entries(data.gender).sort((a, b) => b[1] - a[1])
+  );
 
   return (
     <>
@@ -278,7 +286,7 @@ export default function Summary() {
               <div>A.I. Confidence</div>
             </div>
             {selectedCategory === "race" &&
-              Object.entries(data.race).map(([label, value]) => {
+              Object.entries(sortedRaceData).map(([label, value]) => {
                 const isSelected = selectedRace === label;
 
                 return (
@@ -350,7 +358,7 @@ export default function Summary() {
               })}
 
             {selectedCategory === "sex" &&
-              Object.entries(data.gender).map(([label, value]) => {
+              Object.entries(sortedSexData).map(([label, value]) => {
                 const isSelected = selectedSex === label;
 
                 return (

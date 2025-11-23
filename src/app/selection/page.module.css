@@ -88,9 +88,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: absolute;
   text-align: center;
-  padding: 220px 32px;
+  top: 50%;
+  right: 50%;
+  padding-top: 64px;
 }
 
 .eastwest__wrapper {

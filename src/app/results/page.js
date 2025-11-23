@@ -15,6 +15,7 @@ export default function Results() {
   const fileInputRef = useRef(null);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [cameraPopup, setCameraPopup] = useState(false);
 
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -52,6 +53,10 @@ export default function Results() {
     }
   };
 
+  const handleAccept = () => {
+    router.push("/camera");
+  };
+
   return (
     <>
       <header className={styles.header}>
@@ -71,7 +76,7 @@ export default function Results() {
             <div className={styles.rombus__outline__small}>
               <Image src={rombusesSmall} alt="outline" />
             </div>
-            <button className={styles.photo__wrapper}>
+            <button onClick={() => setCameraPopup(true)} className={styles.photo__wrapper}>
               <div>
                 <Image src={camera} alt="camera" />
               </div>
@@ -79,7 +84,7 @@ export default function Results() {
             <div className={styles.photo__text}>
               <Image src={cameraText} alt="camera" />
             </div>
-          </div>
+          </div>          
           <div className={styles.analysis__item}>
             <div className={styles.rombus__outline__small}>
               <Image src={rombusesSmall} alt="outline" />
@@ -118,6 +123,17 @@ export default function Results() {
             />
           </div>
         </div>
+
+        {cameraPopup ? (
+            <div className={styles.popup__wrapper}>
+              <div className={styles.popup__text__title}>ALLOW A.I. TO ACCESS YOUR CAMERA
+                <div className={styles.popup__text__line}></div>
+                <button onClick={() => setCameraPopup(false)} className={styles.popup__text__button}><h4>Deny</h4></button>
+                <button onClick={handleAccept} className={`${styles.accept} ${styles.popup__text__button}`}><h4>Accept</h4></button>
+                
+              </div>
+            </div>
+            ) : <></>}
 
         <button className={`${styles.back__btn} ${styles.test__btn__small}`}>
           <Link href={"/testing"}>
