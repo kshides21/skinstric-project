@@ -10,6 +10,7 @@ import rombuses from "../../../assets/rombuses.svg";
 import rombusesSmall from "../../../assets/rombuses2.svg";
 import cameraIcon from "../../../assets/camera.svg";
 import diamond from "../../../assets/option.svg";
+import back from "../../../assets/back.svg";
 
 export default function Camera() {
   const router = useRouter();
@@ -22,7 +23,6 @@ export default function Camera() {
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
 
-  // STEP 1 — Show 3s loading animation
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -32,7 +32,6 @@ export default function Camera() {
     return () => clearTimeout(timer);
   }, []);
 
-  // STEP 2 — Start camera after loading
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -53,7 +52,6 @@ export default function Camera() {
     }
   };
 
-  // STEP 3 — Capture frame from video
   const capturePhoto = () => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
@@ -65,23 +63,20 @@ export default function Camera() {
     canvas.height = video.videoHeight;
 
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
     const base64 = canvas.toDataURL("image/png");
-
     setCapturedImage(base64);
   };
 
-  // STEP 4 — Confirm and send captured photo to next step
   const handleConfirm = () => {
     if (!capturedImage) return;
 
-    // store like uploaded image
     localStorage.setItem("uploadedImage", capturedImage);
-
-    // stop camera stream
     streamRef.current?.getTracks().forEach((t) => t.stop());
-
     router.push("/selection");
+  };
+
+  const retakePhoto = () => {
+    setCapturedImage(null);
   };
 
   return (
@@ -99,15 +94,18 @@ export default function Camera() {
       <main>
         <div className={styles.start__analysis}>TO START ANALYSIS</div>
 
-        <div className={styles.titleWrapper}>
-          
+        <div className={styles.title__wrapper}>
           {loading && (
             <>
               <div className={styles.rombus__wrapper}>
-                <div className={`${styles.rombus__outline__big} ${styles.rombus__outline}`}>
+                <div
+                  className={`${styles.rombus__outline__big} ${styles.rombus__outline}`}
+                >
                   <Image src={rombuses} alt="outline" />
                 </div>
-                <div className={`${styles.rombus__outline__small} ${styles.rombus__outline}`}>
+                <div
+                  className={`${styles.rombus__outline__small} ${styles.rombus__outline}`}
+                >
                   <Image src={rombusesSmall} alt="outline" />
                 </div>
               </div>
@@ -116,26 +114,9 @@ export default function Camera() {
                 <div className={styles.img__wrapper}>
                   <Image src={cameraIcon} alt="camera" />
                 </div>
-                <p className={styles.title__text__loading}>SETTING UP CAMERA...</p>
-              </div>
-
-              <div className={styles.camera__text}>
-                <h4>TO GET BETTER RESULTS, MAKE SURE TO HAVE</h4>
-
-                <div className={styles.camera__bullets}>
-                  <div className={styles.camera__bullet}>
-                    <Image className={styles.camera__bullet__img} src={diamond} alt="bullet" />
-                    <h4>NEUTRAL EXPRESSION</h4>
-                  </div>
-                  <div className={styles.camera__bullet}>
-                    <Image className={styles.camera__bullet__img} src={diamond} alt="bullet" />
-                    <h4>FRONTAL POSE</h4>
-                  </div>
-                  <div className={styles.camera__bullet}>
-                    <Image className={styles.camera__bullet__img} src={diamond} alt="bullet" />
-                    <h4>ADEQUATE LIGHTING</h4>
-                  </div>
-                </div>
+                <p className={styles.title__text__loading}>
+                  SETTING UP CAMERA...
+                </p>
               </div>
             </>
           )}
@@ -143,31 +124,11 @@ export default function Camera() {
           {!loading && cameraReady && !capturedImage && (
             <div className={styles.camera__live}>
               <video ref={videoRef} className={styles.video} />
-
-              <div className={`${styles.camera__text__live} ${styles.camera__text}`}>
-                <h4>TO GET BETTER RESULTS, MAKE SURE TO HAVE</h4>
-
-                <div className={styles.camera__bullets}>
-                  <div className={styles.camera__bullet}>
-                    <Image className={styles.camera__bullet__img} src={diamond} alt="bullet" />
-                    <h4>NEUTRAL EXPRESSION</h4>
-                  </div>
-                  <div className={styles.camera__bullet}>
-                    <Image className={styles.camera__bullet__img} src={diamond} alt="bullet" />
-                    <h4>FRONTAL POSE</h4>
-                  </div>
-                  <div className={styles.camera__bullet}>
-                    <Image className={styles.camera__bullet__img} src={diamond} alt="bullet" />
-                    <h4>ADEQUATE LIGHTING</h4>
-                  </div>
-                </div>
-              </div>
-
               <button
                 onClick={capturePhoto}
                 className={`${styles.photo__btn} ${styles.test__btn__small}`}
               >
-                <Image src={takePhoto} alt="take photo"/>
+                <Image src={takePhoto} alt="take photo" />
               </button>
             </div>
           )}
@@ -178,16 +139,64 @@ export default function Camera() {
               <h4 className={styles.great__shot}>GREAT SHOT!</h4>
 
               <button
-                onClick={handleConfirm}
+                onClick={retakePhoto}
                 className={`${styles.results__btn} ${styles.test__btn__small}`}
+              >
+                RETAKE
+              </button>
+
+              <button
+                onClick={handleConfirm}
+                className={`${styles.camera__proceed} ${styles.results__btn} ${styles.test__btn__small}`}
               >
                 PROCEED
               </button>
             </div>
           )}
 
+          <div
+            className={`${styles.camera__text__live} ${styles.camera__text}`}
+          >
+            <h4>TO GET BETTER RESULTS, MAKE SURE TO HAVE</h4>
+
+            <div className={styles.camera__bullets}>
+              <div className={styles.camera__bullet}>
+                <Image
+                  className={styles.camera__bullet__img}
+                  src={diamond}
+                  alt="bullet"
+                />
+                <h4>NEUTRAL EXPRESSION</h4>
+              </div>
+              <div className={styles.camera__bullet}>
+                <Image
+                  className={styles.camera__bullet__img}
+                  src={diamond}
+                  alt="bullet"
+                />
+                <h4>FRONTAL POSE</h4>
+              </div>
+              <div className={styles.camera__bullet}>
+                <Image
+                  className={styles.camera__bullet__img}
+                  src={diamond}
+                  alt="bullet"
+                />
+                <h4>ADEQUATE LIGHTING</h4>
+              </div>
+            </div>
+          </div>
+
           <canvas ref={canvasRef} style={{ display: "none" }} />
         </div>
+
+        <button className={`${styles.back__btn} ${styles.test__btn__small}`}>
+          <Link href={"/results"}>
+            <div className={styles.proceed__small}>
+              <Image src={back} alt="back" />
+            </div>
+          </Link>
+        </button>
       </main>
     </>
   );
