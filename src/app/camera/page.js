@@ -94,7 +94,7 @@ export default function Camera() {
       <main>
         <div className={styles.start__analysis}>TO START ANALYSIS</div>
 
-        <div className={styles.title__wrapper}>
+        <div className={styles.titleWrapper}>
           {loading && (
             <>
               <div className={styles.rombus__wrapper}>
