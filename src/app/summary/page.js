@@ -63,6 +63,10 @@ export default function Summary() {
   Object.entries(data.race).sort((a, b) => b[1] - a[1])
   );
 
+  const sortedAgeData = Object.fromEntries(
+  Object.entries(data.age).sort((a, b) => b[1] - a[1])
+  );
+
   const sortedSexData = Object.fromEntries(
   Object.entries(data.gender).sort((a, b) => b[1] - a[1])
   );
@@ -322,7 +326,7 @@ export default function Summary() {
               })}
 
             {selectedCategory === "age" &&
-              Object.entries(data.age).map(([label, value]) => {
+              Object.entries(data.sortedAgeData).map(([label, value]) => {
                 const isSelected = selectedAge === label;
 
                 return (
