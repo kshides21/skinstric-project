@@ -326,7 +326,7 @@ export default function Summary() {
               })}
 
             {selectedCategory === "age" &&
-              Object.entries(data.sortedAgeData).map(([label, value]) => {
+              Object.entries(sortedAgeData).map(([label, value]) => {
                 const isSelected = selectedAge === label;
 
                 return (
