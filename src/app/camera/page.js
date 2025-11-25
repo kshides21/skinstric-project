@@ -117,7 +117,7 @@ export default function Camera() {
         {loading ? (
           <div className={styles.start__analysis}>TO START ANALYSIS</div>
         ) : (
-          <div style={{ color: "#fff" }} className={styles.start__analysis}>
+          <div className={styles.start__analysis} style={{ color: "#fff" }}>
             TO START ANALYSIS
           </div>
         )}
