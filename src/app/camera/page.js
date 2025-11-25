@@ -32,23 +32,41 @@ export default function Camera() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (cameraReady && videoRef.current && streamRef.current) {
+      videoRef.current.srcObject = streamRef.current;
+      videoRef.current.muted = true;
+      videoRef.current.playsInline = true;
+      videoRef.current.play();
+    }
+  }, [cameraReady]);
+
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user" },
+        video: {
+          facingMode: "user",
+        },
       });
 
       streamRef.current = stream;
 
+      console.log("STREAM:", stream);
+      console.log("TRACKS:", stream.getTracks());
+      console.log("VIDEO ELEMENT:", videoRef.current);
+
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        videoRef.current.play();
+        videoRef.current.playsInline = true;
+        videoRef.current.muted = true;
+
+        await videoRef.current.play();
       }
 
       setCameraReady(true);
     } catch (err) {
       console.error("Camera error:", err);
-      alert("Camera access denied.");
+      alert("Camera access denied or unavailable.");
     }
   };
 
@@ -75,8 +93,12 @@ export default function Camera() {
     router.push("/selection");
   };
 
-  const retakePhoto = () => {
+  const retakePhoto = async () => {
     setCapturedImage(null);
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+      await startCamera();
+    }
   };
 
   return (
@@ -92,7 +114,13 @@ export default function Camera() {
       </header>
 
       <main>
-        <div className={styles.start__analysis}>TO START ANALYSIS</div>
+        {loading ? (
+          <div className={styles.start__analysis}>TO START ANALYSIS</div>
+        ) : (
+          <div style={{ color: "#fff" }} className={styles.start__analysis}>
+            TO START ANALYSIS
+          </div>
+        )}
 
         <div className={styles.titleWrapper}>
           {loading && (
@@ -123,7 +151,13 @@ export default function Camera() {
 
           {!loading && cameraReady && !capturedImage && (
             <div className={styles.camera__live}>
-              <video ref={videoRef} className={styles.video} />
+              <video
+                ref={videoRef}
+                autoPlay
+                playsInline
+                muted
+                className={styles.video}
+              />
               <button
                 onClick={capturePhoto}
                 className={`${styles.photo__btn} ${styles.test__btn__small}`}
@@ -154,38 +188,81 @@ export default function Camera() {
             </div>
           )}
 
-          <div
-            className={`${styles.camera__text__live} ${styles.camera__text}`}
-          >
-            <h4>TO GET BETTER RESULTS, MAKE SURE TO HAVE</h4>
+          {loading ? (
+            <div
+              className={`${styles.camera__text__live} ${styles.camera__text}`}
+            >
+              <h4>TO GET BETTER RESULTS, MAKE SURE TO HAVE</h4>
 
-            <div className={styles.camera__bullets}>
-              <div className={styles.camera__bullet}>
-                <Image
-                  className={styles.camera__bullet__img}
-                  src={diamond}
-                  alt="bullet"
-                />
-                <h4>NEUTRAL EXPRESSION</h4>
-              </div>
-              <div className={styles.camera__bullet}>
-                <Image
-                  className={styles.camera__bullet__img}
-                  src={diamond}
-                  alt="bullet"
-                />
-                <h4>FRONTAL POSE</h4>
-              </div>
-              <div className={styles.camera__bullet}>
-                <Image
-                  className={styles.camera__bullet__img}
-                  src={diamond}
-                  alt="bullet"
-                />
-                <h4>ADEQUATE LIGHTING</h4>
+              <div className={styles.camera__bullets}>
+                <div className={styles.camera__bullet}>
+                  <Image
+                    className={styles.camera__bullet__img}
+                    src={diamond}
+                    alt="bullet"
+                  />
+                  <h4>NEUTRAL EXPRESSION</h4>
+                </div>
+                <div className={styles.camera__bullet}>
+                  <Image
+                    className={styles.camera__bullet__img}
+                    src={diamond}
+                    alt="bullet"
+                  />
+                  <h4>FRONTAL POSE</h4>
+                </div>
+                <div className={styles.camera__bullet}>
+                  <Image
+                    className={styles.camera__bullet__img}
+                    src={diamond}
+                    alt="bullet"
+                  />
+                  <h4>ADEQUATE LIGHTING</h4>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div
+              className={`${styles.camera__text__live} ${styles.camera__text}`}
+            >
+              <h4 style={{ color: "#fff" }}>
+                TO GET BETTER RESULTS, MAKE SURE TO HAVE
+              </h4>
+
+              <div className={styles.camera__bullets}>
+                <div className={styles.camera__bullet}>
+                  <Image
+                    className={styles.camera__bullet__img}
+                    src={diamond}
+                    alt="bullet"
+                    style={{ color: "#fff" }}
+                  />
+                  <h4 style={{ color: "#fff" }}>NEUTRAL EXPRESSION</h4>
+                </div>
+                <div className={styles.camera__bullet}>
+                  <Image
+                    className={styles.camera__bullet__img}
+                    src={diamond}
+                    alt="bullet"
+                    style={{ color: "#fff" }}
+                  />
+                  <h4 style={{ color: "#fff" }}>FRONTAL POSE</h4>
+                </div>
+                <div
+                  style={{ color: "#fff" }}
+                  className={styles.camera__bullet}
+                >
+                  <Image
+                    className={styles.camera__bullet__img}
+                    src={diamond}
+                    alt="bullet"
+                    style={{ color: "#fff" }}
+                  />
+                  <h4 style={{ color: "#fff" }}>ADEQUATE LIGHTING</h4>
+                </div>
+              </div>
+            </div>
+          )}
 
           <canvas ref={canvasRef} style={{ display: "none" }} />
         </div>

@@ -68,9 +68,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  pointer-events: none;
   z-index: 1;
   margin-top: 88px;
+  pointer-events: none;
 }
 
 .rombus__outline {
@@ -104,7 +104,6 @@
   background: transparent;
   border: none;
   cursor: pointer;
-
 }
 
 .proceed__small {
@@ -176,9 +175,11 @@
 
 .results__btn {
   margin-top: 24px;
+  background-color: #fff;
   border: 1px solid #1a1b1c;
   border-radius: 8px;
   padding: 8px;
+  color: #1a1b1c
 }
 
 .results__btn:hover {
@@ -208,6 +209,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
 
 .camera__bullets {
@@ -245,6 +247,33 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -10;
+  top: 60px;
+}
+
+.camera__live {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent;
+  z-index: 1;
+}
+
+.captured__img {
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  object-fit: cover;
+  top: 60px;
+  z-index: -10;
+  pointer-events: none;
+}
+
+.great__shot {
+  color: #fff;
 }
 
 .overlay__text {
@@ -258,6 +287,7 @@
 .camera__text__live {
   width: 100%;
   right: 0;
+  z-index: 1;
 }
 
 .camera__preview {
@@ -265,6 +295,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 60px;
 }
 
 .camera__preview h4 {
@@ -352,7 +386,7 @@
     left: 48px;
   }
     .test__btn__proceed {
-      position:sticky;
+      position: sticky;
       top: 100px;
       right: 64px;
     }
