@@ -51,10 +51,6 @@ export default function Camera() {
 
       streamRef.current = stream;
 
-      console.log("STREAM:", stream);
-      console.log("TRACKS:", stream.getTracks());
-      console.log("VIDEO ELEMENT:", videoRef.current);
-
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
         videoRef.current.playsInline = true;
